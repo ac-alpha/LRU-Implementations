@@ -49,38 +49,52 @@ void print_frame_state(int frames[], int num_frames) {
   }
 }
 
-int main() {
-  int num_frames = 6;
-  int history = 10;
-  int frames[num_frames] = {0};
-  int requests_length = 15;
+// Takes vector of requests as input and outputs number of page faults
+int lru_aging_policy(int requests[], // array containing requests
+  int num_frames_in_system, // to define the page frames in system
+  int history_to_look, // how much bits would the register have
+  int num_requests)
+  {
+    int aging_regs[num_frames_in_system] = {0};
+    int page_faults = 0;
+    int index = 0;
+    int frames[num_frames_in_system] = {0};
 
-  // pages in memory :
-  //   a: 1
-  //   b: 2
-  //   c: 3
-  //    ....
-  //   and so on...
-  // request array consists of page indexes referenced
-  int requests[requests_length] = {3, 5, 1, 6, 3, 6, 8, 1, 4, 9, 2, 7, 7, 9, 5};
-
-  int aging_regs[num_frames] = {0};
-  int page_faults = 0;
-  int index = 0;
-
-  for (int j = 0; j < requests_length; j++) {
-    index = find_page_in_frames(frames, aging_regs, requests[j], num_frames, history);
-    if (index == -1) {
-      page_faults++;
-      int replaced_frame_idx = replace(frames, aging_regs, requests[j], num_frames, history);
-      printf("We replaced %d\n", replaced_frame_idx);
-    } else {
-      printf("We replaced nothing !\n");
+    for (int j = 0; j < num_requests; j++) {
+      index = find_page_in_frames(frames, aging_regs, requests[j], num_frames_in_system, history_to_look);
+      if (index == -1) {
+        page_faults++;
+        int replaced_frame_idx = replace(frames, aging_regs, requests[j], num_frames_in_system, history_to_look);
+        // printf("We replaced %d\n", replaced_frame_idx);
+      } else {
+        // printf("We replaced nothing !\n");
+      }
+      // print_frame_state(frames, num_frames_in_system);
+      // print_regs(aging_regs, num_frames_in_system);
     }
-    print_frame_state(frames, num_frames);
-    print_regs(aging_regs, num_frames);
-  }
-  printf("%d\n", page_faults);
+    printf("%d\n", page_faults);
 
-  return 0;
+    return page_faults;
 }
+
+
+
+// int main() {
+//   int num_frames = 6;
+//   int history = 10;
+//   int requests_length = 15;
+//
+//   // pages in memory :
+//   //   a: 1
+//   //   b: 2
+//   //   c: 3
+//   //    ....
+//   //   and so on...
+//   // request array consists of page indexes referenced
+//   int requests[requests_length] = {3, 5, 1, 6, 3, 6, 8, 1, 4, 9, 2, 7, 7, 9, 5};
+//   int faults = 0;
+//
+//   faults = lru_aging_policy(requests, num_frames, history, requests_length);
+//
+//   return 0;
+// }
