@@ -70,23 +70,23 @@ int lru_clock(std::vector<int> requests, int no_of_frames){
 
 }
 
-// int main(int argc, char const *argv[])
-// {
-// 	std::vector<int> v;
-// 	int frames;
-// 	v.push_back(2);
-// 	v.push_back(3);
-// 	v.push_back(2);
-// 	v.push_back(1);
-// 	v.push_back(5);
-// 	v.push_back(2);
-// 	v.push_back(4);
-// 	v.push_back(5);
-// 	v.push_back(3);
-// 	v.push_back(2);
-// 	v.push_back(5);
-// 	v.push_back(2);
-// 	int faults = lru_clock(v, 3);
-// 	std::cout<< "No. of faults = " << faults << std::endl;
-// 	return 0;
-// }
+int main(int argc, char const *argv[])
+{
+	std::vector<int> v;
+	int frames;
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(2);
+	v.push_back(1);
+	v.push_back(5);
+	v.push_back(2);
+	v.push_back(4);
+	v.push_back(5);
+	v.push_back(3);
+	v.push_back(2);
+	v.push_back(5);
+	v.push_back(2);
+	int faults = lru_clock(v, 3);
+	std::cout<< "No. of faults = " << faults << std::endl;
+	return 0;
+}

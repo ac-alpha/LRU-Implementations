@@ -50,7 +50,7 @@ void print_frame_state(int frames[], int num_frames) {
 }
 
 // Takes vector of requests as input and outputs number of page faults
-int lru_aging_policy(int requests[], // array containing requests
+int lru_aging(int requests[], // array containing requests
   int num_frames_in_system, // to define the page frames in system
   int history_to_look, // how much bits would the register have
   int num_requests)
