@@ -23,14 +23,13 @@ void insert(int newdata) {
    head = newnode; 
 }  
 
-int lru_stack(int *v, int no_of_frames){
+int lru_stack(int *v, int no_of_frames, int len_req){
 
 
     int counter=0;
     int faults=0;
-    int len = (int)sizeof(v)/sizeof(v[0]);
 
-    for(int i=0;i<12;i++){
+    for(int i=0;i<len_req;i++){
        if(counter==0){
             insert(v[i]);
             counter++;
