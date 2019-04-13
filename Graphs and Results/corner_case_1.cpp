@@ -14,7 +14,7 @@ using namespace std;
 int main(){
     int noOfFrames = 5;
     int x = 1;
-    ofstream ti("time.txt");
+    ofstream ti("time2.txt");
     vector<int> request_vector;
     int request_array[1000000];
     for(int i = 0; i < 1000000; i++)
